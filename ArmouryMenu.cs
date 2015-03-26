@@ -18,11 +18,14 @@ public class ArmouryMenu : MonoBehaviour {
 	{
 		DirectoryInfo dir = new DirectoryInfo("Assets/Resources/Characters");
 		FileInfo[] info = dir.GetFiles("*.*");
-		foreach (FileInfo f in info) 
+		foreach (FileInfo file in info) 
 		{
-			if(f.Extension == ".png")
+			if(file.Extension == ".png")
 			{
-				Debug.Log(Path.GetFileNameWithoutExtension(f.Name));
+				Debug.Log(Path.GetFileNameWithoutExtension(file.Name));
+				armouryButton = (GameObject)GameObject.Instantiate(armouryButton, transform.position, Quaternion.identity);
+				armouryButton.transform.SetParent(gameObject.transform, true);
+//				i += 1;
 			}
 		}
 

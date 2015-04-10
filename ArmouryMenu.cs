@@ -7,6 +7,7 @@
 using UnityEngine;
 using System.Collections;
 using System.IO;
+using UnityEngine.UI;
 
 public class ArmouryMenu : MonoBehaviour {
 
@@ -23,8 +24,11 @@ public class ArmouryMenu : MonoBehaviour {
 			if(file.Extension == ".png")
 			{
 				Debug.Log(Path.GetFileNameWithoutExtension(file.Name));
-				armouryButton = (GameObject)GameObject.Instantiate(armouryButton, transform.position, Quaternion.identity);
-				armouryButton.transform.SetParent(gameObject.transform, true);
+				GameObject armBtnPrefab = (GameObject)GameObject.Instantiate(armouryButton, transform.position, Quaternion.identity);
+				armBtnPrefab.transform.SetParent(gameObject.transform, false);
+				RectTransform rectTransform = (RectTransform)armBtnPrefab.transform;
+				rectTransform.offsetMin = new Vector2(220f, 800f);
+				rectTransform.offsetMax = new Vector2(430f, 80f);
 //				i += 1;
 			}
 		}

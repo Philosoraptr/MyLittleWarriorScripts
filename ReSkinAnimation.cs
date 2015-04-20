@@ -7,6 +7,11 @@ public class ReSkinAnimation : MonoBehaviour {
 
 	void LateUpdate()
 	{
+		if(PlayerPrefs.HasKey("Armour"))
+		{
+			spriteSheetName = PlayerPrefs.GetString("Armour");
+        }	
+
 		var subSprites = Resources.LoadAll<Sprite> ("Characters/" + spriteSheetName);
 
 		foreach(var renderer in GetComponentsInChildren<SpriteRenderer>())

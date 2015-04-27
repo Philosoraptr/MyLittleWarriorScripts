@@ -10,7 +10,6 @@ public class Item
 	public string name;
 	public Sprite icon;
 	public bool isActive;
-	public Sprite activeIcon;
 //	public string type;
 //	public string rarity;
 //	public bool isChampion;
@@ -37,11 +36,12 @@ public class CreateArmouryList : MonoBehaviour
 			ArmouryButtonScript button = newButton.GetComponent <ArmouryButtonScript> ();
 			button.nameLabel.text = item.name;
 			button.icon.sprite = item.icon;
-//			button.championIcon.SetActive (item.isChampion);
-//			button.typeLabel.text = item.type;
-//			button.rarityLabel.text = item.rarity;
-//		    button.button.onClick = item.thingToDo;
+			button.activeIcon.SetActive (item.isActive);
 			newButton.transform.SetParent (contentPanel);
+
+			//			button.typeLabel.text = item.type;
+			//			button.rarityLabel.text = item.rarity;
+			//		    button.button.onClick = item.thingToDo;
 		}
 	}
 }

@@ -7,6 +7,7 @@ public class ArmouryButtonScript : MonoBehaviour
 	public Button button;
 	public Text nameLabel;
 	public Image icon;
+	public GameObject activeIcon;
 //	public Text typeLabel;
 //	public Text rarityLabel;
 //	public GameObject championIcon;

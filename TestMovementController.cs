@@ -2,13 +2,7 @@
 using System.Collections;
 
 public class TestMovementController : MonoBehaviour {
-
-//	private string[] classes = new string[]
-//	{
-//		"Leather With Hat", "Robe With Hood", "Gold Knight With Helm", "Metal Knight No Helm", "White Monk"
-//	};
-//	private int counter = 0;
-//	private int counterMax = 0;
+	
 	private GameObject character;
 	private GameObject weapon;
 	Animator anim;
@@ -20,36 +14,10 @@ public class TestMovementController : MonoBehaviour {
 	{
 		character = GameObject.Find("Character");
 		weapon = GameObject.Find ("Weapon");
-//		counterMax = classes.Length;
-//		Repeater();
 		anim = character.GetComponent<Animator>();
 		weaponAnim = weapon.GetComponent<Animator> ();
 		initialSpeed = character.GetComponent<WarriorController> ().speed;
 	}
-
-	void Update()
-	{
-	}
-
-//	public void ChangeClassLoop()
-//	{
-//		counter++;
-//		if(counter == counterMax)
-//		{
-//			counter = 0;
-//		}
-//		ChangeClass();
-//	}
-//
-//	public void ChangeClass()
-//	{
-//		character.GetComponent<ReSkinAnimation>().spriteSheetName = classes[counter];
-//	}
-//	
-//	void Repeater()
-//	{
-//		InvokeRepeating("ChangeClassLoop", 10.0f, 10.0f);
-//	}
 
 	public void PlayAttackAnimation()
 	{

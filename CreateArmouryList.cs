@@ -9,6 +9,8 @@ public class Item
 {
 	public string name;
 	public Sprite icon;
+	public bool isActive;
+	public Sprite activeIcon;
 //	public string type;
 //	public string rarity;
 //	public bool isChampion;
@@ -27,7 +29,7 @@ public class CreateArmouryList : MonoBehaviour
 		PopulateList ();
 	}
 
-	void PopulateList () 
+	void PopulateList ()
 	{
 		foreach (var item in itemList) 
 		{
@@ -35,9 +37,9 @@ public class CreateArmouryList : MonoBehaviour
 			ArmouryButtonScript button = newButton.GetComponent <ArmouryButtonScript> ();
 			button.nameLabel.text = item.name;
 			button.icon.sprite = item.icon;
+//			button.championIcon.SetActive (item.isChampion);
 //			button.typeLabel.text = item.type;
 //			button.rarityLabel.text = item.rarity;
-//			button.championIcon.SetActive (item.isChampion);
 //		    button.button.onClick = item.thingToDo;
 			newButton.transform.SetParent (contentPanel);
 		}

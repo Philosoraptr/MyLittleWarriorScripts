@@ -3,16 +3,27 @@ using System;
 
 public class ReSkinAnimation : MonoBehaviour {
 
-	public string spriteSheetName;
+	public string bodySheetName;
+	public string armourSheetName;
+	public string clothesSheetName;
+	public string greavesSheetName;
+	public string hatSheetName;
 
 	void LateUpdate()
 	{
+		bodySheetName = PlayerPrefs.GetString("Body");
+
 		if(PlayerPrefs.HasKey("Armour"))
 		{
-			spriteSheetName = PlayerPrefs.GetString("Armour");
-        }	
+			armourSheetName = PlayerPrefs.GetString("Armour");
+        }
+	
+		if(PlayerPrefs.HasKey("Clothes"))
+		{
+			armourSheetName = PlayerPrefs.GetString("Clothes");
+		}
 
-		var subSprites = Resources.LoadAll<Sprite> ("Male/Body/" + spriteSheetName);
+		var subSprites = Resources.LoadAll<Sprite> ("Male/Body/" + bodySheetName);
 
 		foreach(var renderer in GetComponentsInChildren<SpriteRenderer>())
 		{

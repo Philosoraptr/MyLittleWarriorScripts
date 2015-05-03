@@ -1,25 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
-
-[System.Serializable]
-public class Item 
-{
-	public string name;
-	public Sprite icon;
-	public bool isActive;
-//	public string type;
-//	public string rarity;
-//	public bool isChampion;
-//	public Button.ButtonClickedEvent thingToDo;
-}
 
 public class CreateArmouryList : MonoBehaviour 
 {
 	public GameObject armouryButton;
-	public List<Item> itemList;
+	public List<Item> itemList = new List<Item>();
 
 	public Transform contentPanel;
 
@@ -34,9 +20,9 @@ public class CreateArmouryList : MonoBehaviour
 		{
 			GameObject newButton = Instantiate (armouryButton) as GameObject;
 			ArmouryButtonScript button = newButton.GetComponent <ArmouryButtonScript> ();
-			button.nameLabel.text = item.name;
-			button.icon.sprite = item.icon;
-			button.activeIcon.SetActive (item.isActive);
+			button.nameLabel.text = item.itemName;
+			button.icon.sprite = item.itemIcon;
+			button.activeIcon.SetActive (item.itemIsActive); // this needs to be driven by playerprefs/somewhere else
 			newButton.transform.SetParent (contentPanel);
 
 			//			button.typeLabel.text = item.type;

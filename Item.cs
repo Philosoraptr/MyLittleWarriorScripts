@@ -14,7 +14,7 @@ public class Item
 	public int itemDefence;
 	public int itemSpeed;
 	public Sprite itemIcon;
-	public bool itemIsActive;
+//	public bool itemIsActive;
 	public bool itemIsConsumable;
 	public bool itemIsEquipment;
 	public ItemEquipmentType itemEquipmentType;
@@ -56,8 +56,9 @@ public class Item
 		itemIsEquipment = isEquipment;
 		itemEquipmentType = equipmentType;
 		itemGender = gender;
-		itemIcon = Resources.LoadAll<Sprite> (itemGender + "/" + itemEquipmentType + "/" + itemName + "/" + itemEquipmentType + "_14")
+
+		var subSprites = Resources.LoadAll<Sprite> (itemGender + "/" + itemEquipmentType + "/" + itemName);
+		itemIcon = subSprites [14];
 	}
-	// Should create some constructors for item
 }
 

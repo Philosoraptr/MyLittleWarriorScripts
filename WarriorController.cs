@@ -6,6 +6,7 @@ public class WarriorController : MonoBehaviour
 	public Vector2 speed = new Vector2(5, 5);
 	public Vector2 direction = new Vector2(-1, 0);
 	public Vector2 movement;
+	public GameObject body;
 
 	// Use this for initialization
 	void Start ()
@@ -17,7 +18,7 @@ public class WarriorController : MonoBehaviour
 	void Update ()
 	{
 		movement = new Vector2(speed.x * direction.x, speed.y * direction.y);
-		Animator anim = GetComponent<Animator> ();
+		Animator anim = body.GetComponent<Animator> ();
 		anim.SetFloat ("speed", movement.x);
     }
     

@@ -3,14 +3,16 @@ using System;
 
 public class ReSkinAnimation : MonoBehaviour {
 
-	public string bodySheetName;
+//	public string bodySheetName;
+
 	private string gender = "Male";
 // The name of the GameObject will be the name of the sprite body part that will have it's sprite updated to the correct item.
 // The GameObject name is also the name of the folder in which the sprites are stored 
-	private string objectName = GameObject.name;
+	private string objectName;
 
 	void Start()
 	{
+		objectName = gameObject.name;
 		PlayerPrefs.SetString ("Gender", gender);
 	}
 
@@ -24,19 +26,6 @@ public class ReSkinAnimation : MonoBehaviour {
             string armourSheetName = PlayerPrefs.GetString(objectName);
 			UpdateSprites(objectName, armourSheetName);
         }
-
-//		var subSprites = Resources.LoadAll<Sprite> ("Male/Body/" + bodySheetName);
-//
-//		foreach(var renderer in GetComponentsInChildren<SpriteRenderer>())
-//		{
-//			string spriteName = renderer.sprite.name;
-//			var newSprite = Array.Find(subSprites, item => item.name == spriteName);
-//
-//			if(newSprite)
-//			{
-//				renderer.sprite = newSprite;
-//			}
-//		}
 	}
 
 	void UpdateSprites(string folder, string spriteSheetName)

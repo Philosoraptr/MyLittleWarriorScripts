@@ -5,15 +5,19 @@ using System.IO;
 
 public class EquipmentDatabase : MonoBehaviour  
 {
-	public List<ItemDatabase> equipment = new List<ItemDatabase>(); 
+	public List<ItemDatabase> equipmentDatabase = new List<ItemDatabase>(); 
+	
+	public ItemDatabase itemDatabase;
 
 	void Start() 
 	{ 
-		for (i = 0; i < ItemDatabase.Count; i++)
+		itemDatabase = GameObject.FindGameObjectWithTag ("Item Database").GetComponent<ItemDatabase>();
+		
+		for (i = 0; i < itemDatabase.items.Count; i++)
 		{
-			if(ItemDatabase[i].itemIsEquipment)
+			if(itemDatabase.items[i].itemIsEquipment)
 			{
-				equipment.add(ItemDatabase[i]);
+				equipmentDatabase.add(ItemDatabase[i]);
 			}
 		}
     }

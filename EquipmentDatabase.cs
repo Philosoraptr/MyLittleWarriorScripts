@@ -13,11 +13,11 @@ public class EquipmentDatabase : MonoBehaviour
 	{ 
 		itemDatabase = GameObject.FindGameObjectWithTag ("Item Database").GetComponent<ItemDatabase>();
 		
-		for (i = 0; i < itemDatabase.items.Count; i++)
+		for (int i = 0; i < itemDatabase.items.Count; i++)
 		{
 			if(itemDatabase.items[i].itemIsEquipment)
 			{
-				equipmentDatabase.add(ItemDatabase[i]);
+//				equipmentDatabase.Add (itemDatabase.items[i]);
 			}
 		}
     }

@@ -27,7 +27,7 @@ public class TestMovementController : MonoBehaviour {
 		if(initialMovement > 0.0f)
 		{
 			anim.SetTrigger ("cast");
-			weapon.renderer.enabled = false;
+			weapon.GetComponent<Renderer>().enabled = false;
 		}
 		else
 		{
@@ -41,6 +41,6 @@ public class TestMovementController : MonoBehaviour {
 	{
 		yield return new WaitForSeconds (1);
 		character.GetComponent<WarriorController>().speed = initialSpeed;
-		weapon.renderer.enabled = true;
+		weapon.GetComponent<Renderer>().enabled = true;
 	}
 }

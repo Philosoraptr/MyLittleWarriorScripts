@@ -13,19 +13,39 @@ public class WarriorController : MonoBehaviour
 	private Animator bodyAnim;
 //	private Animator hatAnim;
 
-	// Use this for initialization
+	private bool touchingEnemy;
+	public float coolDown;
+	private float attackTimer;
+	
 	void Start ()
 	{
 		bodyAnim = body.GetComponent<Animator> ();
 //		hatAnim = hat.GetComponent<Animator> ();
+		touchingEnemy = false;	
+		coolDown = 2.0f;
+		attackTimer = 0;
     }
-	
-	// Update is called once per frame
+
 	void Update ()
 	{
 		movement = new Vector2(speed.x * direction.x, speed.y * direction.y);
 		bodyAnim.SetFloat ("speed", movement.x);
 //		hatAnim.SetFloat ("speed", movement.x);
+
+		if(touchingEnemy)
+		{
+			if(attackTimer > 0)
+				attackTimer -= Time.deltaTime;
+
+			if(attackTimer < 0)
+				attackTimer = 0;
+
+			if(attackTimer == 0)
+			{
+				Attack ();
+				attackTimer = coolDown;
+			}
+		}
     }
     
     void FixedUpdate()
@@ -35,11 +55,30 @@ public class WarriorController : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D otherCollider)
 	{
-		direction.x *= -1;
+//		When the character is walking backwards and forwards
+//		if(otherCollider.name == "BoxSprite")
+//		{
+//			direction.x *= -1;
+//		}
+		Debug.Log ("Collided!");
+	}
+	// could also use OnTriggerExit2D to turn off a bool when moving away
+
+	void OnCollisionStay2D(Collision2D collision)
+	{
+		touchingEnemy = true;
+		Debug.Log ("Collisions!");
 	}
 
-	public void MoveToTrainingArea()
+	void Attack()
 	{
-		transform.position = new Vector2(Camera.main.transform.position.x + (Camera.main.orthographicSize / 2), 0);
+		GameObject.Find ("Body").GetComponent<Animator> ().SetBool ("cast", true);
+		StartCoroutine(WaitThenStopAnimation(coolDown));
+	}
+
+	IEnumerator WaitThenStopAnimation(float waitTime)
+	{
+		yield return new WaitForSeconds (waitTime);
+		GameObject.Find ("Body").GetComponent<Animator> ().SetBool ("cast", false);
 	}
 }

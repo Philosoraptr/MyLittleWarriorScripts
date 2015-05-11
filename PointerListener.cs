@@ -8,32 +8,16 @@ public class PointerListener : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 	public GameObject player;
 	public float directionX;
 
-	bool pressed = false;
-
 	public void OnPointerDown(PointerEventData eventData)
 	{
-		pressed = true;
 		MoveX (directionX);
 	}
 	
 	public void OnPointerUp(PointerEventData eventData)
 	{
-		pressed = false;
-		MoveX (0.0);
+		MoveX (0.0f);
 	}
-	
-	// Needs to stop moving on release. Perhaps the variables in WarriorController shouldn't stay set.
-/*	void Update()
-	{
-		if (!pressed)
-		{
-			MoveX(0);
-			return;
-		}
-		
-		MoveX (directionX);
-	}
-*/
+
 	public void MoveX(float direction)
 	{
 		player.GetComponent<WarriorController> ().direction.x = direction;

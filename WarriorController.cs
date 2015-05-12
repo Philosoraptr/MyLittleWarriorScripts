@@ -21,7 +21,7 @@ public class WarriorController : MonoBehaviour
 	{
 		bodyAnim = body.GetComponent<Animator> ();
 //		hatAnim = hat.GetComponent<Animator> ();
-		touchingEnemy = false;	
+		touchingEnemy = false;
 		coolDown = 2.0f;
 		attackTimer = 0;
     }
@@ -55,34 +55,29 @@ public class WarriorController : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D otherCollider)
 	{
-//		When the character is walking backwards and forwards
-//		if(otherCollider.name == "BoxSprite")
-//		{
-//			direction.x *= -1;
-//		}
+		touchingEnemy = true;
 		Debug.Log ("Collided!");
 	}
 	// could also use OnTriggerExit2D to turn off a bool when moving away
 
-	void OnCollisionStay2D(Collision2D collision)
+	void OnTriggerExit2D(Collider2D otherCollider)
 	{
-		touchingEnemy = true;
-		Debug.Log ("Collisions!");
+		touchingEnemy = false;
+		bodyAnim.SetBool ("cast", false);
+		Debug.Log ("Exit Collision!");
 	}
 
 	void Attack()
 	{
-		//animation = GameObject.Find ("Body").GetComponent<Animation>("CastRight");
-		//animation = GameObject.Find ("Weapon").GetComponent<Animation>("CastRight");
 		//animation.Play();
-		GameObject.Find ("Body").GetComponent<Animator> ().SetBool ("cast", true);
-		GameObject.Find ("Weapon").GetComponent<Animator> ().SetBool ("cast", true);
-		StartCoroutine(WaitThenStopAnimation(animation.clip.length));
+		bodyAnim.SetBool ("cast", true);
+//		GameObject.Find ("Weapon").GetComponent<Animator> ().SetBool ("cast", true);
+		StartCoroutine(WaitThenStopAnimation(attackTimer));
 	}
 
 	IEnumerator WaitThenStopAnimation(float waitTime)
 	{
 		yield return new WaitForSeconds (waitTime);
-		GameObject.Find ("Body").GetComponent<Animator> ().SetBool ("cast", false);
+		bodyAnim.SetBool ("cast", false);
 	}
 }

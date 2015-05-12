@@ -72,8 +72,12 @@ public class WarriorController : MonoBehaviour
 
 	void Attack()
 	{
+		//animation = GameObject.Find ("Body").GetComponent<Animation>("CastRight");
+		//animation = GameObject.Find ("Weapon").GetComponent<Animation>("CastRight");
+		//animation.Play();
 		GameObject.Find ("Body").GetComponent<Animator> ().SetBool ("cast", true);
-		StartCoroutine(WaitThenStopAnimation(coolDown));
+		GameObject.Find ("Weapon").GetComponent<Animator> ().SetBool ("cast", true);
+		StartCoroutine(WaitThenStopAnimation(animation.clip.length));
 	}
 
 	IEnumerator WaitThenStopAnimation(float waitTime)

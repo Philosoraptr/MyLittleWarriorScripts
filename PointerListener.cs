@@ -7,10 +7,19 @@ public class PointerListener : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 {
 	public GameObject player;
 	public float directionX;
+	public bool animPlaying;
+
+	void Start()
+	{
+		animPlaying = false;
+	}
 
 	public void OnPointerDown(PointerEventData eventData)
 	{
-		MoveX (directionX);
+		if(!animPlaying)
+		{
+			MoveX (directionX);
+		}
 	}
 	
 	public void OnPointerUp(PointerEventData eventData)

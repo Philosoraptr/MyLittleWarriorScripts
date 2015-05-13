@@ -37,6 +37,8 @@ public class WarriorController : MonoBehaviour
 			if(attackTimer > 0)
 				attackTimer -= Time.deltaTime;
 
+			Debug.Log("Attack Timer=" + attackTimer);
+
 			if(attackTimer < 0)
 				attackTimer = 0;
 
@@ -69,15 +71,25 @@ public class WarriorController : MonoBehaviour
 
 	void Attack()
 	{
-		//animation.Play();
+		Debug.Log("InsideAttack() Timer=" + attackTimer);
+
 		bodyAnim.SetBool ("cast", true);
+		GameObject.Find("Left Button").GetComponent<PointerListener> ().animPlaying = true;
+		GameObject.Find("Right Button").GetComponent<PointerListener> ().animPlaying = true;
 //		GameObject.Find ("Weapon").GetComponent<Animator> ().SetBool ("cast", true);
-		StartCoroutine(WaitThenStopAnimation(attackTimer));
+		StartCoroutine(WaitThenStopAnimation(coolDown));
 	}
 
 	IEnumerator WaitThenStopAnimation(float waitTime)
 	{
+		Debug.Log("Ienumerator1 Timer=" + attackTimer);
+
 		yield return new WaitForSeconds (waitTime);
+
+		Debug.Log("Ienumerator2 Timer=" + attackTimer);
+
 		bodyAnim.SetBool ("cast", false);
+		GameObject.Find("Left Button").GetComponent<PointerListener> ().animPlaying = false;
+		GameObject.Find("Right Button").GetComponent<PointerListener> ().animPlaying = false;
 	}
 }

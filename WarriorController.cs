@@ -8,10 +8,14 @@ public class WarriorController : MonoBehaviour
 	public Vector2 movement;
 
 	public GameObject body;
-//	public GameObject hat;
-
+	public GameObject weapon;
+	public GameObject leftButton;
+	public GameObject rightButton;
+	
+	public string attackType;
+	
 	private Animator bodyAnim;
-//	private Animator hatAnim;
+	private Animator weaponAnim;
 
 	private bool touchingEnemy;
 	public float coolDown;
@@ -20,7 +24,7 @@ public class WarriorController : MonoBehaviour
 	void Start ()
 	{
 		bodyAnim = body.GetComponent<Animator> ();
-//		hatAnim = hat.GetComponent<Animator> ();
+		weaponAnim = weapon.GetComponent<Animator> ();
 		touchingEnemy = false;
 		coolDown = 2.0f;
 		attackTimer = 0;
@@ -30,7 +34,6 @@ public class WarriorController : MonoBehaviour
 	{
 		movement = new Vector2(speed.x * direction.x, speed.y * direction.y);
 		bodyAnim.SetFloat ("speed", movement.x);
-//		hatAnim.SetFloat ("speed", movement.x);
 
 		if(touchingEnemy)
 		{
@@ -58,25 +61,23 @@ public class WarriorController : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D otherCollider)
 	{
 		touchingEnemy = true;
-		Debug.Log ("Collided!");
+		Debug.Log ("Enter Collision!");
 	}
 	// could also use OnTriggerExit2D to turn off a bool when moving away
 
 	void OnTriggerExit2D(Collider2D otherCollider)
 	{
 		touchingEnemy = false;
-		bodyAnim.SetBool ("cast", false);
 		Debug.Log ("Exit Collision!");
 	}
 
 	void Attack()
 	{
-		Debug.Log("InsideAttack() Timer=" + attackTimer);
-
-		bodyAnim.SetBool ("cast", true);
-		GameObject.Find("Left Button").GetComponent<PointerListener> ().animPlaying = true;
-		GameObject.Find("Right Button").GetComponent<PointerListener> ().animPlaying = true;
-//		GameObject.Find ("Weapon").GetComponent<Animator> ().SetBool ("cast", true);
+		Debug.Log("Inside Attack() Timer=" + attackTimer);
+		bodyAnim.SetBool (attackType, true);
+		weaponAnim.SetBool(attackType, true);
+		leftButton.GetComponent<PointerListener> ().animPlaying = true;
+		rightButton.GetComponent<PointerListener> ().animPlaying = true;
 		StartCoroutine(WaitThenStopAnimation(coolDown));
 	}
 
@@ -85,11 +86,11 @@ public class WarriorController : MonoBehaviour
 		Debug.Log("Ienumerator1 Timer=" + attackTimer);
 
 		yield return new WaitForSeconds (waitTime);
-
 		Debug.Log("Ienumerator2 Timer=" + attackTimer);
 
-		bodyAnim.SetBool ("cast", false);
-		GameObject.Find("Left Button").GetComponent<PointerListener> ().animPlaying = false;
-		GameObject.Find("Right Button").GetComponent<PointerListener> ().animPlaying = false;
+		bodyAnim.SetBool (attackType, false);
+		weaponAnim.SetBool (attackType, false);
+		leftButton.GetComponent<PointerListener> ().animPlaying = false;
+		rightButton.GetComponent<PointerListener> ().animPlaying = false;
 	}
 }
